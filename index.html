@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rutina — Progresión + Guardado (v3)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Rutina — Hipertrofia + Natación</h1>
+    <p>Abs en Pull · Antebrazo en Push · <strong>Elevaciones laterales = Hombro</strong>. Guardado automático activado.</p>
+  </header>
+
+  <section class="tips">
+    <div class="card">
+      <h3>Reglas de progresión (fácil)</h3>
+      <ul>
+        <li>Rangos: <span class="badge">grandes 6–10</span>, <span class="badge">aislamientos 10–15</span> (laterales/rear hasta 20), <span class="badge">core 8–15</span>.</li>
+        <li>Termina con <span class="badge">1–2 reps “en el tanque”</span>.</li>
+        <li>Primero <strong>sube reps</strong>. Cuando llegues al tope en todas las series, <strong>sube el peso</strong> (2.5–5%).</li>
+        <li>Tras subir peso, vuelves a reps más bajas y repites el ciclo.</li>
+        <li>Descansos: <span class="badge">2–3 min</span> grandes; <span class="badge">60–90 s</span> aislamientos/abs/antebrazo.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Recordatorios</h3>
+      <ul>
+        <li>Superávit: fuerza ~<span class="badge">3000 kcal</span>; con natación ~<span class="badge">3200 kcal</span>.</li>
+        <li>Si 2 semanas no subes ≥ 0.2 kg/sem → <span class="badge">+200–300 kcal/día</span>.</li>
+        <li>Natación suave 1–2×/sem: <span class="badge">20–30 min</span> o <span class="badge">600–1000 m</span>.</li>
+        <li>Si cae tu fuerza 2 semanas, baja a <span class="badge">600–800 m</span> o descansa.</li>
+        <li>Tríceps overhead: mantén <span class="badge">12–15 reps</span>, suave con codos/hombros.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <button id="saveNow">Guardar ahora</button>
+    <button id="exportBtn">Exportar .json</button>
+    <button id="importBtn">Importar .json</button>
+    <input type="file" id="fileInput" accept="application/json" style="display:none">
+    <button id="resetBtn">Reiniciar (vaciar datos)</button>
+    <span class="status" id="statusText">—</span>
+  </div>
+
+  <main>
+    <section class="days">
+      <!-- Lunes -->
+      <div class="day">
+        <h2>Lunes — Pull (Espalda + Bíceps) + Abdomen</h2>
+        <table>
+          <thead><tr><th>Ejercicio</th><th>Series</th><th>Reps</th><th>Peso</th><th>RIR</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr data-muscle="espalda">
+              <td>Jalón al Pecho / Dominadas</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="4" max="4" value="4" disabled></td>
+              <td>6–10</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Escápulas deprimidas</td>
+            </tr>
+            <tr data-muscle="espalda">
+              <td>Remo Sentado (V) / Pecho Apoyado</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="4" max="4" value="4" disabled></td>
+              <td>6–10</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Sin balanceo</td>
+            </tr>
+            <tr data-muscle="espalda">
+              <td>Pulldown Inverso / Pullover Cuerda</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="3" value="2"></td>
+              <td>10–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="espalda">
+              <td>Remo en Punta / Cable</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="3" value="2"></td>
+              <td>10–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr class="split"><td colspan="6">Bíceps</td></tr>
+            <tr data-muscle="biceps">
+              <td>Curl Barra EZ</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>8–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="biceps">
+              <td>Curl Inclinado Mancuerna</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>8–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr class="split"><td colspan="6">Abdomen</td></tr>
+            <tr data-muscle="abdomen">
+              <td>Elevaciones Rodillas Colgado</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>10–15</td><td></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Si grip falla: crunch polea</td>
+            </tr>
+            <tr data-muscle="abdomen">
+              <td>Pallof Press (cada lado)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="3" value="2"></td>
+              <td>12–15</td><td></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Antirotación</td>
+            </tr>
+            <tr class="opt" data-muscle="delts_post" data-optional="1">
+              <td>Face Pull (Opcional)</td>
+              <td class="seriesCell">
+                <label><input type="checkbox" class="toggle"> Incluir</label>
+                <input type="number" class="seriesInput" min="2" max="2" value="2" disabled>
+              </td>
+              <td>15–20</td><td></td><td>2</td><td>1s pausa atrás</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Martes -->
+      <div class="day">
+        <h2>Martes — Push (Pecho + Tríceps) + Hombro + Antebrazo</h2>
+        <table>
+          <thead><tr><th>Ejercicio</th><th>Series</th><th>Reps</th><th>Peso</th><th>RIR</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr data-muscle="pecho">
+              <td>Press Pecho (Máquina/Mancuerna)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="4" max="4" value="4" disabled></td>
+              <td>6–10</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Escápulas estables</td>
+            </tr>
+            <tr data-muscle="pecho">
+              <td>Press Inclinado</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>8–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="pecho">
+              <td>Pec Deck / Fly</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="2" value="2" disabled></td>
+              <td>10–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Estirar controlado</td>
+            </tr>
+            <tr class="split"><td colspan="6">Tríceps</td></tr>
+            <tr data-muscle="triceps">
+              <td>Pressdown (Cuerda/Barra)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>10–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Bloqueo suave</td>
+            </tr>
+            <tr data-muscle="triceps">
+              <td>Overhead Cuerda (reps altas)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="3" value="2"></td>
+              <td>12–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Cuida codo</td>
+            </tr>
+            <tr class="split"><td colspan="6">Hombro</td></tr>
+            <tr data-muscle="delts_lat">
+              <td>Elevaciones Laterales</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>12–20</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Control</td>
+            </tr>
+            <tr class="split"><td colspan="6">Antebrazo</td></tr>
+            <tr data-muscle="antebrazo">
+              <td>Curl Muñeca Supino</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>12–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Tempo</td>
+            </tr>
+            <tr data-muscle="antebrazo">
+              <td>Extensión Muñeca Prono</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="2" value="2" disabled></td>
+              <td>15–20</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Natación A -->
+        <div class="swim">
+          <div class="swRow">
+            <label><input type="checkbox" id="swA_en"> Incluir Natación — <strong>Sesión A (Técnica)</strong></label>
+          </div>
+          <div class="swRow">
+            <label>Metros objetivo:</label>
+            <input type="number" id="swA_m" min="200" max="2000" step="50" value="500">
+            <span class="swHelp">Sugerido: 400–800 m (técnica + fácil)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Miércoles -->
+      <div class="day">
+        <h2>Miércoles — Piernas + Hombro + Trapecio</h2>
+        <table>
+          <thead><tr><th>Ejercicio</th><th>Series</th><th>Reps</th><th>Peso</th><th>RIR</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr data-muscle="cuadriceps">
+              <td>Sentadilla Smith / Prensa</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="4" max="4" value="4" disabled></td>
+              <td>6–10</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Profundidad segura</td>
+            </tr>
+            <tr data-muscle="isquios">
+              <td>Peso Muerto Rumano / Curl Femoral</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="4" value="3"></td>
+              <td>6–10</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Isquios tensos</td>
+            </tr>
+            <tr data-muscle="cuadriceps">
+              <td>Extensión de Pierna</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="3" value="2"></td>
+              <td>10–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Pico 1s</td>
+            </tr>
+            <tr data-muscle="gemelos">
+              <td>Gemelos</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>8–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Pausa abajo</td>
+            </tr>
+            <tr class="split"><td colspan="6">Hombro</td></tr>
+            <tr data-muscle="delts_lat">
+              <td>Elevaciones Laterales</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="4" value="3"></td>
+              <td>12–20</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="delts_post">
+              <td>Face Pull / Posterior</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>15–20</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">1s atrás</td>
+            </tr>
+            <tr class="opt" data-muscle="delts_ant" data-optional="1">
+              <td>Press Hombro (Opcional)</td>
+              <td class="seriesCell">
+                <label><input type="checkbox" class="toggle"> Incluir</label>
+                <input type="number" class="seriesInput" min="2" max="2" value="2" disabled>
+              </td>
+              <td>6–10</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Solo si estás fresco</td>
+            </tr>
+            <tr class="split"><td colspan="6">Trapecio</td></tr>
+            <tr data-muscle="trapecio">
+              <td>Encogimientos (Shrugs)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>10–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Pausa 1s arriba</td>
+            </tr>
+            <tr class="opt" data-muscle="trapecio" data-optional="1">
+              <td>Farmer Walk (Opcional)</td>
+              <td class="seriesCell">
+                <label><input type="checkbox" class="toggle"> Incluir</label>
+                <input type="number" class="seriesInput" min="2" max="3" value="2" disabled>
+              </td>
+              <td>30–40 m</td><td></td><td>1–2</td><td contenteditable data-field="nota">Postura neutra</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Jueves -->
+      <div class="day">
+        <h2>Jueves — Brazos (Bombeo)</h2>
+        <table>
+          <thead><tr><th>Ejercicio</th><th>Series</th><th>Reps</th><th>Peso</th><th>RIR</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr class="split"><td colspan="6">Bíceps</td></tr>
+            <tr data-muscle="biceps">
+              <td>Curl (variante que faltó)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>10–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="biceps">
+              <td>Martillo (Mancuerna)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>10–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Neutral</td>
+            </tr>
+            <tr class="split"><td colspan="6">Tríceps</td></tr>
+            <tr data-muscle="triceps">
+              <td>Pressdown 1 Mano</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>12–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="triceps">
+              <td>Extensión 1 Mano (Cable)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>12–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Viernes -->
+      <div class="day">
+        <h2>Viernes — Espalda + Pecho (Ligero) + Abdomen</h2>
+        <table>
+          <thead><tr><th>Ejercicio</th><th>Series</th><th>Reps</th><th>Peso</th><th>RIR</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr data-muscle="espalda">
+              <td>Pull (vertical)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>8–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="espalda">
+              <td>Remo (horizontal)</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>8–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="pecho">
+              <td>Press de Pecho</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>8–12</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr data-muscle="pecho">
+              <td>Fly Inclinado</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="2" value="2" disabled></td>
+              <td>12–15</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Estiramiento</td>
+            </tr>
+            <tr data-muscle="delts_post">
+              <td>Deltoide Posterior</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="2" max="2" value="2" disabled></td>
+              <td>15–20</td><td contenteditable data-field="peso"></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota"></td>
+            </tr>
+            <tr class="split"><td colspan="6">Abdomen</td></tr>
+            <tr data-muscle="abdomen">
+              <td>Crunch en Polea</td>
+              <td class="seriesCell"><input type="number" class="seriesInput" min="3" max="3" value="3" disabled></td>
+              <td>10–15</td><td></td><td contenteditable data-field="rir">1–2</td><td contenteditable data-field="nota">Curvar columna</td>
+            </tr>
+            <tr class="opt" data-muscle="abdomen" data-optional="1">
+              <td>Rueda Abdominal (Opcional)</td>
+              <td class="seriesCell">
+                <label><input type="checkbox" class="toggle"> Incluir</label>
+                <input type="number" class="seriesInput" min="2" max="3" value="2" disabled>
+              </td>
+              <td>8–12</td><td></td><td>1–2</td><td contenteditable data-field="nota">Control lumbar</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Sábado -->
+      <div class="day">
+        <h2>Sábado — Natación</h2>
+        <div class="swim">
+          <div class="swRow">
+            <label><input type="checkbox" id="swB_en"> Incluir Natación — <strong>Sesión B (Continuo fácil)</strong></label>
+          </div>
+          <div class="swRow">
+            <label>Metros objetivo:</label>
+            <input type="number" id="swB_m" min="200" max="3000" step="50" value="800">
+            <span class="swHelp">Sugerido: 600–1000 m (ritmo cómodo)</span>
+          </div>
+          <div class="swRow swTotal">Total de natación semanal: <strong><span id="swTotal">0</span> m</strong></div>
+        </div>
+      </div>
+
+      <!-- Domingo -->
+      <div class="day">
+        <h2>Domingo — Descanso + Sauna</h2>
+        <p class="mini">Sauna 1–3 rondas de 10–15 min (descanso 5–10 min entre rondas). Hidratación/electrolitos.</p>
+      </div>
+    </section>
+
+    <aside>
+      <h3 class="sumTitle">Series por músculo (total semanal)</h3>
+      <div id="summary"></div>
+      <p class="mini">Rangos orientativos: espalda 14–20, pecho 12–16, delts 10–14, brazos 10–12, piernas 12–18, gemelos 6–8, abs 6–12, trapecio 3–6.</p>
+      <div class="swim">
+        <div class="swRow swTotal">Natación semanal (A+B): <strong><span id="swTotalAside">0</span> m</strong></div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
